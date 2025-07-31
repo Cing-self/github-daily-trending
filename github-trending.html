@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日GitHub趋势</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2eaadc',
+                        secondary: '#171515',
+                        accent: '#f1e05a',
+                        dark: '#161b22',
+                        light: '#f0f6fc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .card-shadow {
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+            }
+            .language-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen">
+    <!-- 导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-github text-2xl text-gray-800"></i>
+                <h1 class="text-xl font-bold text-gray-800">GitHub 每日趋势</h1>
+            </div>
+            <div class="text-gray-500 text-sm">
+                <span id="current-date">2025-07-31</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 趋势概览 -->
+        <div class="mb-10 text-center">
+            <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-2">今日热门仓库</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">发现最受欢迎的开源项目，了解开发者社区的最新动态和趋势</p>
+        </div>
+
+        <!-- 仓库列表容器 -->
+        <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 这里将通过JavaScript动态填充内容 -->
+            <div class="text-center py-10 text-gray-500">
+                加载中...
+            </div>
+        </div>
+
+        <!-- 加载更多 -->
+        <div class="mt-10 text-center">
+            <button class="bg-white border border-gray-300 rounded-md px-6 py-2.5 text-gray-700 font-medium hover:bg-gray-50 transition-colors">
+                加载更多 <i class="fa fa-chevron-down ml-1"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-gray-300 py-10 mt-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <i class="fa fa-github text-xl"></i>
+                        <span class="font-bold text-white">GitHub 趋势</span>
+                    </div>
+                    <p class="text-sm text-gray-400">每日更新的GitHub热门仓库展示</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fa fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>© 2025 GitHub 趋势. 数据来源于GitHub.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 编程语言颜色映射
+        const languageColors = {
+            'Python': '#3572A5',
+            'TypeScript': '#3178C6',
+            'C++': '#F34B7D',
+            'Rust': '#DEA584',
+            'Go': '#00ADD8',
+            'Swift': '#F05138',
+            'Java': '#B07219',
+            'default': '#808080'
+        };
+
+        // 数字格式化
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        // 设置当前日期
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置日期
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = today.toLocaleDateString('zh-CN', options);
+
+            // 渲染仓库列表 - 注意：这里的数据会被n8n替换
+            const repos = [{"id":27,"name":"kijai/ComfyUI-WanVideoWrapper","url":"https://github.com/kijai/ComfyUI-WanVideoWrapper","description":null,"stars":3586,"forks":266,"language":"Python","stars_today":58,"period_stars":58,"owner":"kijai","repo_name":"ComfyUI-WanVideoWrapper","crawled_at":"2025-08-01T00:23:53.02536","rank":null},{"id":28,"name":"stenzek/duckstation","url":"https://github.com/stenzek/duckstation","description":"Fast PlayStation 1 emulator for x86-64/AArch32/AArch64/RV64","stars":8590,"forks":774,"language":"C++","stars_today":50,"period_stars":50,"owner":"stenzek","repo_name":"duckstation","crawled_at":"2025-08-01T00:23:53.025592","rank":null},{"id":29,"name":"SkyworkAI/SkyReels-V2","url":"https://github.com/SkyworkAI/SkyReels-V2","description":"SkyReels-V2: Infinite-length Film Generative model","stars":3772,"forks":485,"language":"Python","stars_today":20,"period_stars":20,"owner":"SkyworkAI","repo_name":"SkyReels-V2","crawled_at":"2025-08-01T00:23:53.025802","rank":null},{"id":30,"name":"OpenPipe/ART","url":"https://github.com/OpenPipe/ART","description":"Agent Reinforcement Trainer: train multi-step agents for real-world tasks using GRPO. Give your agents on-the-job training. Reinforcement learning for Qwen2.5, Qwen3, Llama, Kimi, and more!","stars":4077,"forks":252,"language":"Python","stars_today":251,"period_stars":251,"owner":"OpenPipe","repo_name":"ART","crawled_at":"2025-08-01T00:23:53.025951","rank":null},{"id":31,"name":"EmenstaNougat/ESP32-BlueJammer","url":"https://github.com/EmenstaNougat/ESP32-BlueJammer","description":"The ESP32-BlueJammer (Bluetooth jammer, BLE jammer, WiFi jammer, RC jammer) disrupts 2.4GHz communications. Using an ESP32 and nRF24 modules, it generates noise and unnecessary packets, causing interference between the devices communicating, making them unable to work as intended. Ideal for controlled disruption and security testing.","stars":3441,"forks":513,"language":null,"stars_today":499,"period_stars":499,"owner":"EmenstaNougat","repo_name":"ESP32-BlueJammer","crawled_at":"2025-08-01T00:23:53.026079","rank":null},{"id":32,"name":"9001/copyparty","url":"https://github.com/9001/copyparty","description":"Portable file server with accelerated resumable uploads, dedup, WebDAV, FTP, TFTP, zeroconf, media indexer, thumbnails++ all in one file, no deps","stars":15845,"forks":505,"language":"Python","stars_today":3223,"period_stars":3223,"owner":"9001","repo_name":"copyparty","crawled_at":"2025-08-01T00:23:53.026228","rank":null},{"id":33,"name":"puppeteer/puppeteer","url":"https://github.com/puppeteer/puppeteer","description":"JavaScript API for Chrome and Firefox","stars":91344,"forks":9241,"language":"TypeScript","stars_today":18,"period_stars":18,"owner":"puppeteer","repo_name":"puppeteer","crawled_at":"2025-08-01T00:23:53.026355","rank":null},{"id":34,"name":"Canner/WrenAI","url":"https://github.com/Canner/WrenAI","description":"⚡️Wren AI is your GenBI Agent, that you can query any database with natural language, get accurate SQL(Text-to-SQL), charts(Text-to-Charts) & AI-generated insights in seconds.","stars":9070,"forks":934,"language":"TypeScript","stars_today":126,"period_stars":126,"owner":"Canner","repo_name":"WrenAI","crawled_at":"2025-08-01T00:23:53.02649","rank":null},{"id":35,"name":"pointfreeco/swift-composable-architecture","url":"https://github.com/pointfreeco/swift-composable-architecture","description":"A library for building applications in a consistent and understandable way, with composition, testing, and ergonomics in mind.","stars":13542,"forks":1555,"language":"Swift","stars_today":7,"period_stars":7,"owner":"pointfreeco","repo_name":"swift-composable-architecture","crawled_at":"2025-08-01T00:23:53.02662","rank":null},{"id":36,"name":"fastrepl/hyprnote","url":"https://github.com/fastrepl/hyprnote","description":"Local-first AI Notepad for Private Meetings","stars":3546,"forks":183,"language":"TypeScript","stars_today":208,"period_stars":208,"owner":"fastrepl","repo_name":"hyprnote","crawled_at":"2025-08-01T00:23:53.026784","rank":null},{"id":37,"name":"NemProject/nem","url":"https://github.com/NemProject/nem","description":"number go up 💹","stars":51,"forks":16,"language":"Java","stars_today":206,"period_stars":206,"owner":"NemProject","repo_name":"nem","crawled_at":"2025-08-01T00:23:53.026911","rank":null},{"id":38,"name":"linkwarden/linkwarden","url":"https://github.com/linkwarden/linkwarden","description":"⚡️⚡️⚡️ Self-hosted collaborative bookmark manager to collect, read, annotate, and fully preserve what matters, all in one place.","stars":13350,"forks":519,"language":"TypeScript","stars_today":34,"period_stars":34,"owner":"linkwarden","repo_name":"linkwarden","crawled_at":"2025-08-01T00:23:53.027037","rank":null},{"id":39,"name":"rustdesk/rustdesk","url":"https://github.com/rustdesk/rustdesk","description":"An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.","stars":94385,"forks":13811,"language":"Rust","stars_today":147,"period_stars":147,"owner":"rustdesk","repo_name":"rustdesk","crawled_at":"2025-08-01T00:23:53.027192","rank":null},{"id":40,"name":"cloudwego/eino","url":"https://github.com/cloudwego/eino","description":"The ultimate LLM/AI application development framework in Golang.","stars":6059,"forks":471,"language":"Go","stars_today":182,"period_stars":182,"owner":"cloudwego","repo_name":"eino","crawled_at":"2025-08-01T00:23:53.027317","rank":null}];
+            const container = document.getElementById('repos-container');
+            
+            // 清空加载提示
+            container.innerHTML = '';
+            
+            // 渲染每个仓库卡片
+            repos.forEach(repo => {
+                const languageColor = languageColors[repo.language] || languageColors.default;
+                
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg overflow-hidden card-shadow card-hover';
+                card.innerHTML = `
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="font-bold text-lg mb-1 hover:text-primary transition-colors">
+                                    <a href="${repo.url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
+                                </h3>
+                                <div class="flex items-center text-sm text-gray-500 mb-2">
+                                    ${repo.language ? `
+                                        <span class="language-dot mr-1.5" style="background-color: ${languageColor}"></span>
+                                        <span>${repo.language}</span>
+                                    ` : ''}
+                                </div>
+                            </div>
+                            <div class="flex items-center bg-gray-100 px-2.5 py-1 rounded-full-full text-sm font-medium">
+                                <i class="fa fa-star text-yellow-500 mr-1"></i>
+                                <span>${formatNumber(repo.stars)}</span>
+                            </div>
+                        </div>
+
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
+                            ${repo.description || '暂无描述'}
+                        </p>
+
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex items-center text-sm text-gray-500">
+                                <span class="flex items-center mr-4">
+                                    <i class="fa fa-code-fork mr-1"></i>
+                                    <span>${formatNumber(repo.forks)}</span>
+                                </span>
+                                <span class="flex items-center text-green-500 font-medium">
+                                    <i class="fa fa-arrow-up mr-1"></i>
+                                    <span>${formatNumber(repo.stars_today)} 今日新增</span>
+                                </span>
+                            </div>
+                            <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="text-primary hover:text-primary/80 text-sm font-medium flex items-center transition-colors">
+                                查看详情 <i class="fa fa-external-link ml-1 text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
