@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>产品展示页面</title>
+    <style>
+        /**
+         * 产品展示页面样式文件
+         * 包含左右布局的产品图片和描述展示
+         */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: rgba(33, 33, 74, 0.39);
+            min-height: 100vh;
+        }
+        
+        .product-container {
+            width: 250px;
+            height: 125px;
+            background: rgba(33, 33, 74, 0.39);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(121, 134, 203, 0.3);
+        }
+        
+        .product-container:nth-child(2) {
+            top: 145px;
+            left: 25px;
+        }
+        
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: #f0f0f0;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ccc;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        
+        .image-placeholder {
+            color: rgba(121, 134, 203, 0.7);
+            font-size: 16px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .product-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5px;
+        }
+        
+        .product-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #EBEBEB;
+            margin-bottom: 5px;
+        }
+        
+
+        
+        .product-description {
+            color: #EBEBEB;
+            line-height: 1.4;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .product-features li {
+            padding: 5px 0;
+            color: #666;
+            font-size: 13px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .product-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(121, 134, 203, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(121, 134, 203, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(121, 134, 203, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <div class="product-image">
+            <img src="产品图1.jpg" alt="蜂蜜">
+        </div>
+        <div class="product-info">
+            <div class="product-title">蜂蜜</div>
+            <div class="product-description">
+                纯天然蜂蜜，口感醇厚，营养丰富
+            </div>
+        </div>
+    </div>
+    
+    <div class="product-container">
+        <div class="product-image">
+            <img src="产品图2.jpg" alt="百花蜂蜜">
+        </div>
+        <div class="product-info">
+            <div class="product-title">百花蜂蜜</div>
+            <div class="product-description">
+                多种花源蜂蜜，香甜可口，健康美味
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>
