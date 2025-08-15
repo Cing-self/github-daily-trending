@@ -2,7 +2,7 @@
     "redirects": [
       {
         "source": "/",
-        "destination": "/index.html",
+        "destination": "/product_display.html",
         "statusCode": 302
       }
     ]
